@@ -1,13 +1,14 @@
 <template>
-  <div class="home">
-    <h1>This is your home page.</h1>This is a description of our Boards app visible without authentication.
+  <div class="component">
+    This is the component that will draw each of the list item.
+    Embedded in here will the a position for tasks.
   </div>
 </template>
 
 
 <script>
 export default {
-  name: "home",
+  name: "component",
   data() {
     return {};
   },
