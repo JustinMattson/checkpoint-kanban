@@ -22,11 +22,14 @@ export default new Vuex.Store({
     boards: [],
     activeBoard: {},
     lists: [],
+    tasks: [],
+    comments: []
   },
   mutations: {
     setUser(state, user) {
       state.user = user;
     },
+    //#region BOARDS
     setBoards(state, boards) {
       state.boards = boards;
     },
@@ -41,16 +44,62 @@ export default new Vuex.Store({
     setActiveBoard(state, activeBoard) {
       state.activeBoard = activeBoard;
     },
+    //#endregion
+
+    //#region LISTS
     setList(state, list) {
       state.lists.push(list);
     },
     setLists(state, lists) {
       state.lists = lists;
     },
+    updateList(state, update) {
+      let foundList = state.lists.find(l => l.id == update.id)
+      foundList = update
+    },
+    removeList(state, id) {
+      let index = state.lists.findIndex((l) => l.id == id);
+      state.lists.splice(index, 1);
+    },
+    //#endregion
+
+    //#region TASKS
+    setTask(state, task) {
+      state.tasks.push(task);
+    },
+    setTasks(state, tasks) {
+      state.tasks = tasks;
+    },
+    updateTask(state, update) {
+      let foundTask = state.tasks.find(t => t.id == update.id)
+      foundTask = update
+    },
+    removeTask(state, id) {
+      let index = state.tasks.findIndex((t) => t.id == id);
+      state.tasks.splice(index, 1);
+    },
+    //#endregion
+
+    //#region COMMENTS
+    setComment(state, comment) {
+      state.comments.push(comment);
+    },
+    setComments(state, comments) {
+      state.comments = comments;
+    },
+    updateComment(state, update) {
+      let foundComment = state.comments.find(t => t.id == update.id)
+      foundComment = update
+    },
+    removeComment(state, id) {
+      let index = state.comments.findIndex((t) => t.id == id);
+      state.comments.splice(index, 1);
+    },
+    //#endregion
   },
   actions: {
     //#region -- AUTH STUFF --
-    setBearer({}, bearer) {
+    setBearer({ }, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
@@ -131,8 +180,30 @@ export default new Vuex.Store({
     async addList({ commit, dispatch }, newList) {
       try {
         let res = await api.post("lists", newList);
-        debugger;
         commit("setList", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async editList({ commit, dispatch }, update) {
+      try {
+        let res = await api.put("lists/" + update.id, update);
+        commit("updateList", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteList({ commit, dispatch }, id) {
+      try {
+        let response = confirm(
+          "Delete may orphan children. Click 'Ok' to confirm you wish to delete List"
+        );
+        if (response) {
+          let res = await api.delete("lists/" + id);
+          commit("removeList", id);
+        } else {
+          alert("Delete cancelled");
+        }
       } catch (error) {
         console.error(error);
       }
@@ -140,11 +211,91 @@ export default new Vuex.Store({
     //#endregion
 
     //#region -- Tasks --
+    async getTasks({ commit, dispatch }) {
+      try {
+        await api.get("tasks").then((res) => {
 
+          commit("setTasks", res.data);
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async addTask({ commit, dispatch }, newTask) {
+      try {
+        let res = await api.post("tasks", newTask);
+        commit("setTask", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async editTask({ commit, dispatch }, update) {
+      try {
+        let res = await api.put("tasks/" + update.id, update);
+        commit("updateTask", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteTask({ commit, dispatch }, id) {
+      try {
+        let response = confirm(
+          "Delete may orphan children. Click 'Ok' to confirm you wish to delete Task"
+        );
+        if (response) {
+          let res = await api.delete("tasks/" + id);
+          commit("removeTask", id);
+        } else {
+          alert("Delete cancelled");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
     //#endregion
 
     //#region -- Comments --
+    async getComments({ commit, dispatch }) {
+      try {
+        await api.get("tasks").then((res) => {
 
+          commit("setComments", res.data);
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async addComment({ commit, dispatch }, newComment) {
+      try {
+        let res = await api.post("comments", newComment);
+        commit("setComment", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async editComment({ commit, dispatch }, update) {
+      try {
+        let res = await api.put("comments/" + update.id, update);
+        commit("updateComment", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteComment({ commit, dispatch }, id) {
+      try {
+        let response = confirm(
+          "Click 'Ok' to confirm you wish to delete Comment"
+        );
+        if (response) {
+          let res = await api.delete("comments/" + id);
+          commit("removeComment", id);
+        } else {
+          alert("Delete cancelled");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
     //#endregion
   },
 });

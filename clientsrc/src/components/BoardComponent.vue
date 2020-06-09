@@ -3,7 +3,7 @@
     <!-- This is the component that will design board link on the boards vue. -->
     <div class="card shadow border-secondary">
       <div class="d-flex justify-content-between px-2">
-        <span>{{board.id}}</span>&nbsp;
+        <span>BOARD ID: {{board.id}}</span>&nbsp;
         <span>
           <i class="fas fa-pencil-alt action" @click="toggleEdit"></i>&nbsp;
           <i class="far fa-trash-alt text-danger action" @click="deleteBoard(board.id)"></i>
@@ -18,7 +18,7 @@
       <!-- Insert edit Form -->
       <form class="d-inline" v-if="edit" @submit.prevent="editBoard">
         <input type="text" name="title" v-model="board.title" />
-        <input type="text" name="board" v-model="board.description" />
+        <input type="text" name="description" v-model="board.description" />
         <button type="submit" class="btn btn-outline-success">Submit</button>
       </form>
     </div>
