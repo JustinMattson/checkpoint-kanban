@@ -1,7 +1,7 @@
 <template>
   <div class="board col-xs-4">
     <!-- This is the component that will design board link on the boards vue. -->
-    <div class="card shadow border-secondary">
+    <div class="card shadow m-2">
       <div class="d-flex justify-content-between px-2">
         <span>BOARD ID: {{board.id}}</span>&nbsp;
         <span>

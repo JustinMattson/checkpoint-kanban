@@ -23,7 +23,7 @@ export default new Vuex.Store({
     activeBoard: {},
     lists: [],
     tasks: [],
-    comments: []
+    comments: [],
   },
   mutations: {
     setUser(state, user) {
@@ -54,8 +54,8 @@ export default new Vuex.Store({
       state.lists = lists;
     },
     updateList(state, update) {
-      let foundList = state.lists.find(l => l.id == update.id)
-      foundList = update
+      let foundList = state.lists.find((l) => l.id == update.id);
+      foundList = update;
     },
     removeList(state, id) {
       let index = state.lists.findIndex((l) => l.id == id);
@@ -71,8 +71,8 @@ export default new Vuex.Store({
       state.tasks = tasks;
     },
     updateTask(state, update) {
-      let foundTask = state.tasks.find(t => t.id == update.id)
-      foundTask = update
+      let foundTask = state.tasks.find((t) => t.id == update.id);
+      foundTask = update;
     },
     removeTask(state, id) {
       let index = state.tasks.findIndex((t) => t.id == id);
@@ -88,8 +88,8 @@ export default new Vuex.Store({
       state.comments = comments;
     },
     updateComment(state, update) {
-      let foundComment = state.comments.find(t => t.id == update.id)
-      foundComment = update
+      let foundComment = state.comments.find((t) => t.id == update.id);
+      foundComment = update;
     },
     removeComment(state, id) {
       let index = state.comments.findIndex((t) => t.id == id);
@@ -99,7 +99,7 @@ export default new Vuex.Store({
   },
   actions: {
     //#region -- AUTH STUFF --
-    setBearer({ }, bearer) {
+    setBearer({}, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
@@ -214,7 +214,6 @@ export default new Vuex.Store({
     async getTasks({ commit, dispatch }) {
       try {
         await api.get("tasks").then((res) => {
-
           commit("setTasks", res.data);
         });
       } catch (error) {
@@ -257,8 +256,7 @@ export default new Vuex.Store({
     //#region -- Comments --
     async getComments({ commit, dispatch }) {
       try {
-        await api.get("tasks").then((res) => {
-
+        await api.get("comments").then((res) => {
           commit("setComments", res.data);
         });
       } catch (error) {

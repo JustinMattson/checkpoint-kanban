@@ -54,10 +54,15 @@ export default {
 </style>
 
 <style>
+#app {
+  flex-grow: 1;
+  min-height: 100vh;
+}
 .horizontal-scrollable > .row {
   overflow-x: auto;
   white-space: nowrap;
   flex-wrap: nowrap;
+  position: absolute;
 }
 .horizontal-scrollable > .row > .col-xs-4 {
   display: inline-block;

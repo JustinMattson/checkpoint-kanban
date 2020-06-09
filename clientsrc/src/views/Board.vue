@@ -6,32 +6,35 @@
     <h1 v-if="board.title">{{board.title}}</h1>
     <h1 v-else>Loading...</h1>
     <!-- Insert form to Add new list items-->
-    <form class="form-inline" @submit.prevent="addList">
-      <div class="form-group">
-        <input
-          type="text"
-          name="title"
-          id
-          class="form-control"
-          placeholder="List Title..."
-          v-model="newList.title"
-        />
-        <input
-          type="text"
-          name="description"
-          id
-          class="form-control"
-          placeholder="List Description..."
-          v-model="newList.description"
-        />
-        <button type="submit" class="btn btn-outline-info">Submit</button>
-      </div>
-    </form>
+    <div class="d-flex justify-content-center">Create List</div>
+    <div class="d-flex justify-content-center">
+      <form class="form-inline" @submit.prevent="addList">
+        <div class="form-group">
+          <input
+            type="text"
+            name="title"
+            id
+            class="form-control"
+            placeholder="List Title..."
+            v-model="newList.title"
+          />
+          <input
+            type="text"
+            name="description"
+            id
+            class="form-control"
+            placeholder="List Description..."
+            v-model="newList.description"
+          />
+          <button type="submit" class="btn btn-outline-info">Submit</button>
+        </div>
+      </form>
+    </div>
 
     <!-- Display our Lists -->
-    <div class="container horizontal-scrollable">
+    <div class="container-fluid horizontal-scrollable grow">
       <div class="row">
-        <list v-for="list in lists" :key="list.id" :list="list" />
+        <list v-for="list in lists" :key="list.id" :list="list" v-show="board.id == list.boardId" />
       </div>
     </div>
   </div>
@@ -71,3 +74,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.grow {
+  min-height: 100vh;
+}
+</style>

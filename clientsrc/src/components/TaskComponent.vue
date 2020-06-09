@@ -1,6 +1,6 @@
 <template>
   <div class="task">
-    <div class="card border-primary">
+    <div class="card shadown" style="background-color:#bbb">
       <div class="d-flex justify-content-between px-2">
         <span>TASK ID: {{task.id}}</span>&nbsp;
         <span>
@@ -51,6 +51,9 @@ export default {
         taskId: this.task.id
       }
     };
+  },
+  mounted() {
+    this.$store.dispatch("getComments");
   },
   computed: {
     comments() {

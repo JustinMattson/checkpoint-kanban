@@ -2,7 +2,7 @@
   <div class="list col-xs-4">
     <!-- This is the component that will draw each of the list item.
     Embedded in here will the a position for tasks.-->
-    <div class="card border-danger">
+    <div class="card shadow m-2" style="background-color:#ddd">
       <div class="d-flex justify-content-between px-2">
         <span>LIST ID: {{list.id}}</span>&nbsp;
         <span>
