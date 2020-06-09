@@ -29,12 +29,16 @@
     </form>
 
     <!-- Display our Lists -->
-    <div></div>
+    <div class="container horizontal-scrollable">
+      <div class="row">
+        <list v-for="list in lists" :key="list.id" :list="list" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Lists from "@/components/ListComponent.vue";
+import List from "@/components/ListComponent.vue";
 export default {
   name: "board",
   data() {
@@ -63,8 +67,7 @@ export default {
     }
   },
   components: {
-    Lists
+    List
   }
-  //props: ["boardId"]
 };
 </script>

@@ -52,3 +52,18 @@ export default {
   color: #42b983;
 }
 </style>
+
+<style>
+.horizontal-scrollable > .row {
+  overflow-x: auto;
+  white-space: nowrap;
+  flex-wrap: nowrap;
+}
+.horizontal-scrollable > .row > .col-xs-4 {
+  display: inline-block;
+  float: none;
+}
+.action {
+  cursor: pointer;
+}
+</style>

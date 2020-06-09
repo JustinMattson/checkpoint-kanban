@@ -6,13 +6,16 @@
       <input type="text" placeholder="description" v-model="newBoard.description" />
       <button type="submit">Create Board</button>
     </form>
-    <div v-for="board in boards" :key="board.id">
-      <router-link :to="{name: 'board', params: {boardId: board.id}}">{{board.title}}</router-link>
+    <div class="container horizontal-scrollable">
+      <div class="row">
+        <board v-for="board in boards" :key="board.id" :board="board" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Board from "@/components/BoardComponent.vue";
 export default {
   name: "boards",
   mounted() {
@@ -36,6 +39,9 @@ export default {
       this.$store.dispatch("addBoard", this.newBoard);
       this.newBoard = { title: "", description: "" };
     }
+  },
+  components: {
+    Board
   }
 };
 </script>

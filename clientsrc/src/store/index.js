@@ -30,6 +30,14 @@ export default new Vuex.Store({
     setBoards(state, boards) {
       state.boards = boards;
     },
+    updateBoard(state, update) {
+      let foundBoard = state.boards.find((b) => b.id == update.id);
+      foundBoard = update;
+    },
+    removeBoard(state, id) {
+      let index = state.boards.findIndex((b) => b.id == id);
+      state.boards.splice(index, 1);
+    },
     setActiveBoard(state, activeBoard) {
       state.activeBoard = activeBoard;
     },
@@ -81,6 +89,29 @@ export default new Vuex.Store({
       try {
         let res = await api.get("boards/" + id);
         commit("setActiveBoard", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async editBoard({ commit, dispatch }, update) {
+      try {
+        let res = await api.put("boards/" + update.id, update);
+        commit("updateBoard", res.data);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteBoard({ commit, dispatch }, id) {
+      try {
+        let response = confirm(
+          "Delete may orphan children. Click 'Ok' to confirm you wish to delete Board"
+        );
+        if (response) {
+          let res = await api.delete("boards/" + id);
+          commit("removeBoard", id);
+        } else {
+          alert("Delete cancelled");
+        }
       } catch (error) {
         console.error(error);
       }
