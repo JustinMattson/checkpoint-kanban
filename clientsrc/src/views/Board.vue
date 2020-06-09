@@ -1,8 +1,9 @@
 <template>
   <div class="board">
-    Board Vue
-    This board will show multiple list components each having multiple task components
-    drawn dynamically with v-for:
+    <div
+      class="text-left text-muted"
+      :style="{fontSize:fontSize}"
+    >Board Vue: Display multiple list components. Each list can have multiple task components. Each task can have multiple comments that can be moved to the various lists.</div>
     <h1 v-if="board.title">{{board.title}}</h1>
     <h1 v-else>Loading...</h1>
     <!-- Insert form to Add new list items-->
@@ -26,7 +27,7 @@
             placeholder="List Description..."
             v-model="newList.description"
           />
-          <button type="submit" class="btn btn-outline-info">Submit</button>
+          <button type="submit" class="btn btn-outline-danger">Submit</button>
         </div>
       </form>
     </div>
@@ -46,6 +47,7 @@ export default {
   name: "board",
   data() {
     return {
+      fontSize: "10pt",
       newList: {
         boardId: this.$route.params.boardId
       }

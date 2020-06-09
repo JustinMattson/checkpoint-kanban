@@ -16,11 +16,19 @@
         </div>
       </router-link>
       <!-- Insert edit Form -->
-      <form class="d-inline" v-if="edit" @submit.prevent="editBoard">
-        <input type="text" name="title" v-model="board.title" />
-        <input type="text" name="description" v-model="board.description" />
-        <button type="submit" class="btn btn-outline-success">Submit</button>
-      </form>
+      <!-- REVIEW THIS IS THE MAIN BOARDS VUE -->
+      <div class="m-2">
+        <form class="d-inline" v-if="edit" @submit.prevent="editBoard">
+          <input type="text" name="title" v-model="board.title" placeholder="Board Title..." />
+          <input
+            type="text"
+            name="description"
+            v-model="board.description"
+            placeholder="Board Description..."
+          />
+          <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      </div>
     </div>
   </div>
 </template>

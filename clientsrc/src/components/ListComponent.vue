@@ -2,7 +2,7 @@
   <div class="list col-xs-4">
     <!-- This is the component that will draw each of the list item.
     Embedded in here will the a position for tasks.-->
-    <div class="card shadow m-2" style="background-color:#ddd">
+    <div class="card shadow m-2 border-danger" style="background-color:#ddd">
       <div class="d-flex justify-content-between px-2">
         <span>LIST ID: {{list.id}}</span>&nbsp;
         <span>
@@ -21,17 +21,24 @@
         </form>
         <task v-for="task in tasks" :key="task.id" :task="task" v-show="list.id == task.listId" />
       </div>
-      <span v-if="taskForm == false" class="text-right">
-        <i class="fas fa-plus action" @click="toggleTask">Add Task</i>
-      </span>
-      <span v-else class="text-right">
-        <i class="fas fa-minus action" @click="toggleTask">Done Adding Tasks</i>
-      </span>
-      <form class="d-inline" v-if="taskForm" @submit.prevent="addTask">
-        <input type="text" name="title" v-model="newTask.title" />
-        <input type="text" name="description" v-model="newTask.description" />
-        <button type="submit" class="btn btn-outline-primary">Submit</button>
-      </form>
+      <div class="m-3">
+        <div v-if="taskForm == false" class="text-right">
+          <i class="fas fa-plus action" @click="toggleTask">&nbsp;Add Task</i>
+        </div>
+        <div v-else class="text-right">
+          <i class="fas fa-minus action" @click="toggleTask">&nbsp;Done Adding Tasks</i>
+        </div>
+        <form class="d-inline" v-if="taskForm" @submit.prevent="addTask">
+          <input type="text" name="title" v-model="newTask.title" placeholder="Task Title..." />
+          <input
+            type="text"
+            name="description"
+            v-model="newTask.description"
+            placeholder="Task Description..."
+          />
+          <button type="submit" class="btn btn-outline-primary">Submit</button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
