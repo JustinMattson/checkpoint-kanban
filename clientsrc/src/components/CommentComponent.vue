@@ -1,6 +1,6 @@
 <template>
   <div class="comment">
-    <div class="card shadow border-success my-1" style="background-color:#ddd;maxWidth:35em">
+    <div class="card shadow border-success my-1" style="background-color:#ddd;minWidth:35em">
       <div class="d-flex justify-content-between px-2">
         <span class="text-left">
           <!-- TASK ID -->
@@ -24,7 +24,11 @@
         <div>{{comment.description}}</div>
 
         <!-- COMMENT ID -->
-        <div class="text-success text-left" :style="{fontSize:fontSize}">{{comment.id}}</div>
+        <!-- USER Name -->
+        <span class="d-flex justify-content-between">
+          <div class="text-success text-left" :style="{fontSize:fontSize}">{{comment.id}}</div>
+          <div class="text-right" :style="{fontSize:fontSize}">{{comment.creatorEmail}}</div>
+        </span>
       </div>
     </div>
   </div>

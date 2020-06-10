@@ -1,6 +1,6 @@
 <template>
   <div class="task">
-    <div class="card shadow border-primary my-1" style="background-color:#eee;maxWidth:35em">
+    <div class="card shadow border-primary my-1" style="background-color:#eee;">
       <div class="d-flex justify-content-between px-2">
         <!-- LIST ID -->
         <span class="text-muted text-left" :style="{fontSize:fontSize}">{{task.listId}}</span>&nbsp;
