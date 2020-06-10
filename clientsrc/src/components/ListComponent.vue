@@ -8,7 +8,7 @@
         <span class="text-secondary text-left" :style="{fontSize:fontSize}">{{list.boardId}}</span>
         <span>
           <i class="fas fa-pencil-alt action" @click="toggleEdit"></i>&nbsp;
-          <i class="far fa-trash-alt text-danger action" @click="deleteList(list.id)"></i>
+          <i class="far fa-trash-alt text-danger action" @click="deleteList()"></i>
         </span>
       </div>
       <div class="card-body py-0 text-wrap">
@@ -83,8 +83,8 @@ export default {
       this.$store.dispatch("editList", this.list);
       this.edit = false;
     },
-    deleteList(id) {
-      this.$store.dispatch("deleteList", id);
+    deleteList() {
+      this.$store.dispatch("deleteList", this.list);
     },
     toggleTask() {
       this.taskForm = !this.taskForm;

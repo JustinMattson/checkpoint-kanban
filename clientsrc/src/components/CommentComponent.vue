@@ -52,7 +52,7 @@ export default {
     },
 
     deleteComment() {
-      this.$store.dispatch("deleteComment", this.comment.id);
+      this.$store.dispatch("deleteComment", this.comment);
     },
     editComment() {
       this.$store.dispatch("editComment", this.comment);

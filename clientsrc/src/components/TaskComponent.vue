@@ -41,10 +41,9 @@
               aria-expanded="false"
             >Move Task</button>
             <div class="dropdown-menu">
-              ...
-              <li>In Test</li>
-              <li>Review Complete</li>
-              <li>Celebrate Success</li>
+              <ul>
+                <moveTemplate v-for="list in lists" :key="list.id" :list="list" :task="task" />
+              </ul>
             </div>
           </div>
           <div v-if="commentForm == false" class="text-right text-success m-2">
@@ -54,6 +53,7 @@
             <i class="fas fa-minus action" @click="toggleComment">&nbsp;Done Adding Comments</i>
           </div>
         </span>
+
         <!-- ADD COMMENT FORM -->
         <form class="d-inline" v-if="commentForm" @submit.prevent="addComment">
           <input type="text" name="title" v-model="newComment.title" placeholder="Comment Title..." />
@@ -73,6 +73,7 @@
 
 <script>
 import Comment from "@/components/CommentComponent.vue";
+import moveTemplate from "@/components/MoveTemplateComponent.vue";
 export default {
   name: "Task",
   props: ["task"],
@@ -82,7 +83,7 @@ export default {
       edit: false,
       commentForm: false,
       newComment: {
-        boardId: this.task.boardID,
+        boardId: this.task.boardId,
         listId: this.task.listId,
         taskId: this.task.id
       },
@@ -95,6 +96,9 @@ export default {
   computed: {
     comments() {
       return this.$store.state.comments[this.task.id];
+    },
+    lists() {
+      return this.$store.state.lists;
     }
   },
   methods: {
@@ -107,7 +111,7 @@ export default {
     addComment() {
       this.$store.dispatch("addComment", { ...this.newComment });
       this.newComment = {
-        boardId: this.task.boardID,
+        boardId: this.task.boardId,
         listId: this.task.listId,
         taskId: this.task.id
       };
@@ -117,12 +121,13 @@ export default {
       this.edit = false;
     },
     deleteTask() {
-      this.$store.dispatch("deleteTask", this.task.id);
+      this.$store.dispatch("deleteTask", this.task);
     },
     moveTaskToList() {}
   },
   components: {
-    Comment
+    Comment,
+    moveTemplate
   }
 };
 </script>

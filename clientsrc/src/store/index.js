@@ -71,12 +71,16 @@ export default new Vuex.Store({
       Vue.set(state.tasks, tasks.listId, tasks.data);
     },
     updateTask(state, update) {
-      let foundTask = state.tasks.find((t) => t.id == update.id);
-      foundTask = update;
+      let foundTask = state.tasks[update.listId].find((t) => t.id == update.id);
+      foundTask = update
     },
-    removeTask(state, id) {
-      let index = state.tasks.findIndex((t) => t.id == id);
-      state.tasks.splice(index, 1);
+    removeTask(state, task) {
+      let index = state.tasks[task.listId].findIndex((t) => t.id == task.id);
+      state.tasks[task.listId].splice(index, 1);
+    },
+    moveTask(state, update) {
+      let index = state.tasks[update.listId].findIndex(t => t.id == update.taskId)
+      state.tasks[update.listId].splice(index, 1);
     },
     //#endregion
 
@@ -88,18 +92,18 @@ export default new Vuex.Store({
       Vue.set(state.comments, comments.taskId, comments.data);
     },
     updateComment(state, update) {
-      let foundComment = state.comments.find((t) => t.id == update.id);
+      let foundComment = state.comments[update.taskId].find((t) => t.id == update.id);
       foundComment = update;
     },
-    removeComment(state, id) {
-      let index = state.comments.findIndex((t) => t.id == id);
-      state.comments.splice(index, 1);
+    removeComment(state, comment) {
+      let index = state.comments[comment.taskId].findIndex((t) => t.id == comment.id);
+      state.comments[comment.taskId].splice(index, 1);
     },
     //#endregion
   },
   actions: {
     //#region -- AUTH STUFF --
-    setBearer({}, bearer) {
+    setBearer({ }, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
@@ -235,14 +239,14 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
-    async deleteTask({ commit, dispatch }, id) {
+    async deleteTask({ commit, dispatch }, task) {
       try {
         let response = confirm(
           "Delete may orphan children. Click 'Ok' to confirm you wish to delete Task"
         );
         if (response) {
-          let res = await api.delete("tasks/" + id);
-          commit("removeTask", id);
+          let res = await api.delete("tasks/" + task.id);
+          commit("removeTask", task);
         } else {
           alert("Delete cancelled");
         }
@@ -277,14 +281,14 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
-    async deleteComment({ commit, dispatch }, id) {
+    async deleteComment({ commit, dispatch }, comment) {
       try {
         let response = confirm(
           "Click 'Ok' to confirm you wish to delete Comment"
         );
         if (response) {
-          let res = await api.delete("comments/" + id);
-          commit("removeComment", id);
+          let res = await api.delete("comments/" + comment.id);
+          commit("removeComment", comment);
         } else {
           alert("Delete cancelled");
         }
@@ -293,5 +297,23 @@ export default new Vuex.Store({
       }
     },
     //#endregion
+
+    async moveList({ commit, dispatch }, obj) {
+      let newObj = { id: obj.taskId, listId: obj.newId }
+      try {
+        await api.put("tasks/" + obj.taskId, newObj)
+        commit("moveTask", obj)
+        dispatch("getTasks", obj.newId)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
   },
+
+
+
+
+
+
 });
