@@ -3,7 +3,7 @@
     <!-- This is the component that will design board link on the boards vue. -->
     <div class="card shadow m-2">
       <div class="d-flex justify-content-between px-2">
-        <span>BOARD ID: {{board.id}}</span>&nbsp;
+        <span class="text-muted" :style="{fontSize:fontSize}">BOARD ID: {{board.id}}</span>&nbsp;
         <span>
           <i class="fas fa-pencil-alt action" @click="toggleEdit"></i>&nbsp;
           <i class="far fa-trash-alt text-danger action" @click="deleteBoard(board.id)"></i>
@@ -39,6 +39,7 @@ export default {
   props: ["board"],
   data() {
     return {
+      fontSize: "10px",
       edit: false
     };
   },

@@ -1,8 +1,8 @@
 <template>
   <div class="task">
-    <div class="card shadown" style="background-color:#bbb">
+    <div class="card shadow border-primary" style="background-color:#eee">
       <div class="d-flex justify-content-between px-2">
-        <span>TASK ID: {{task.id}}</span>&nbsp;
+        <span class="text-muted" :style="{fontSize:fontSize}">TASK ID: {{task.id}}</span>&nbsp;
         <span>
           <i class="fas fa-pencil-alt action" @click="toggleEdit"></i>&nbsp;
           <i class="far fa-trash-alt text-danger action" @click="deleteTask(task.id)"></i>
@@ -21,18 +21,24 @@
       </div>
 
       <!-- ADD COMMENT FORM -->
-
-      <span v-if="commentForm == false" class="text-right">
-        <i class="fas fa-plus action" @click="toggleComment">Add Comment</i>
-      </span>
-      <span v-else class="text-right">
-        <i class="fas fa-minus action" @click="toggleComment">Done Adding Comments</i>
-      </span>
-      <form class="d-inline" v-if="commentForm" @submit.prevent="addComment">
-        <input type="text" name="title" v-model="newComment.title" />
-        <input type="text" name="description" v-model="newComment.description" />
-        <button type="submit" class="btn btn-outline-success">Submit</button>
-      </form>
+      <div class="m-2">
+        <div v-if="commentForm == false" class="text-right text-success m-2">
+          <i class="fas fa-plus action" @click="toggleComment">&nbsp;Add Comment</i>
+        </div>
+        <div v-else class="text-right text-success">
+          <i class="fas fa-minus action" @click="toggleComment">&nbsp;Done Adding Comments</i>
+        </div>
+        <form class="d-inline" v-if="commentForm" @submit.prevent="addComment">
+          <input type="text" name="title" v-model="newComment.title" placeholder="Comment Title..." />
+          <input
+            type="text"
+            name="description"
+            v-model="newComment.description"
+            placeholder="Comment Description..."
+          />
+          <button type="submit" class="btn btn-outline-success">Submit</button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -45,6 +51,7 @@ export default {
   props: ["task"],
   data() {
     return {
+      fontSize: "10px",
       edit: false,
       commentForm: false,
       newComment: {

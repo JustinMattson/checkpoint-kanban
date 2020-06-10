@@ -1,8 +1,8 @@
 <template>
   <div class="comment">
-    <div class="card border-success">
+    <div class="card shadow border-success" style="background-color:#ddd">
       <div class="d-flex justify-content-between px-2">
-        <span>COMMENT ID: {{comment.id}}</span>&nbsp;
+        <span class="text-muted" :style="{fontSize:fontSize}">COMMENT ID: {{comment.id}}</span>&nbsp;
         <span>
           <i class="fas fa-pencil-alt action" @click="toggleEdit"></i>&nbsp;
           <i class="far fa-trash-alt text-danger action" @click="deleteComment(comment.id)"></i>
@@ -29,6 +29,7 @@ export default {
   props: ["comment"],
   data() {
     return {
+      fontSize: "10px",
       edit: false
     };
   },

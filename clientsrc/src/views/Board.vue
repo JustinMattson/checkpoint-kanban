@@ -7,7 +7,7 @@
     <h1 v-if="board.title">{{board.title}}</h1>
     <h1 v-else>Loading...</h1>
     <!-- Insert form to Add new list items-->
-    <div class="d-flex justify-content-center">Create List</div>
+    <div class="d-flex justify-content-center text-danger">Create List</div>
     <div class="d-flex justify-content-center">
       <form class="form-inline" @submit.prevent="addList">
         <div class="form-group">

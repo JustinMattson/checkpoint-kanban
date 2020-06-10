@@ -4,7 +4,7 @@
     Embedded in here will the a position for tasks.-->
     <div class="card shadow m-2 border-danger" style="background-color:#ddd">
       <div class="d-flex justify-content-between px-2">
-        <span>LIST ID: {{list.id}}</span>&nbsp;
+        <span class="text-muted" :style="{fontSize:fontSize}">LIST ID: {{list.id}}</span>&nbsp;
         <span>
           <i class="fas fa-pencil-alt action" @click="toggleEdit"></i>&nbsp;
           <i class="far fa-trash-alt text-danger action" @click="deleteList(list.id)"></i>
@@ -21,11 +21,12 @@
         </form>
         <task v-for="task in tasks" :key="task.id" :task="task" v-show="list.id == task.listId" />
       </div>
-      <div class="m-3">
-        <div v-if="taskForm == false" class="text-right">
+      <!-- ADD TASK FORM -->
+      <div class="m-2">
+        <div v-if="taskForm == false" class="text-right text-primary">
           <i class="fas fa-plus action" @click="toggleTask">&nbsp;Add Task</i>
         </div>
-        <div v-else class="text-right">
+        <div v-else class="text-right text-primary">
           <i class="fas fa-minus action" @click="toggleTask">&nbsp;Done Adding Tasks</i>
         </div>
         <form class="d-inline" v-if="taskForm" @submit.prevent="addTask">
@@ -51,6 +52,7 @@ export default {
   props: ["list"],
   data() {
     return {
+      fontSize: "10px",
       edit: false,
       taskForm: false,
       newTask: {
