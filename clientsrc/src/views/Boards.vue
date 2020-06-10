@@ -1,10 +1,11 @@
 <template>
   <div class="boards">
     <h1>WELCOME TO THE BOARDS!!!</h1>
-    <form @submit.prevent="addBoard">
+    <span class="text-secondary">Create Board</span>
+    <form @submit.prevent="addBoard" class="mb-4">
       <input type="text" placeholder="title" v-model="newBoard.title" required />
       <input type="text" placeholder="description" v-model="newBoard.description" />
-      <button type="submit">Create Board</button>
+      <button class="btn btn-outline-secondary" type="submit">Create Board</button>
     </form>
     <div class="container horizontal-scrollable">
       <div class="row">

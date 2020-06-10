@@ -2,26 +2,32 @@
   <div class="task">
     <div class="card shadow border-primary" style="background-color:#eee">
       <div class="d-flex justify-content-between px-2">
-        <span class="text-muted" :style="{fontSize:fontSize}">TASK ID: {{task.id}}</span>&nbsp;
+        <!-- LIST ID -->
+        <span class="text-muted text-left" :style="{fontSize:fontSize}">{{task.listId}}</span>&nbsp;
         <span>
           <i class="fas fa-pencil-alt action" @click="toggleEdit"></i>&nbsp;
           <i class="far fa-trash-alt text-danger action" @click="deleteTask(task.id)"></i>
         </span>
       </div>
-      <div class="card-body">
+      <div class="card-body py-0">
+        <!-- EDIT TASK FORM -->
+        <div class="m-2">
+          <form class="d-inline" v-if="edit" @submit.prevent="editTask">
+            <input type="text" name="title" v-model="task.title" />
+            <input type="text" name="description" v-model="task.description" />
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
+          </form>
+        </div>
         <h4 class="card-title">{{task.title}}</h4>
-        <div>{{task.description}}</div>
-        <div>TASK.LISTID: {{task.listId}}</div>
-        <form class="d-inline" v-if="edit" @submit.prevent="editTask">
-          <input type="text" name="title" v-model="task.title" />
-          <input type="text" name="description" v-model="task.description" />
-          <button type="submit" class="btn btn-outline-primary">Submit</button>
-        </form>
+        <div class="pb-2">{{task.description}}</div>
+
+        <!-- TASK ID -->
+        <div class="text-primary text-left" :style="{fontSize:fontSize}">{{task.id}}</div>
         <comment v-for="comment in comments" :key="comment.id" :comment="comment" />
       </div>
 
       <!-- ADD COMMENT FORM -->
-      <div class="m-2">
+      <div class="p-2">
         <div v-if="commentForm == false" class="text-right text-success m-2">
           <i class="fas fa-plus action" @click="toggleComment">&nbsp;Add Comment</i>
         </div>

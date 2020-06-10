@@ -4,26 +4,31 @@
     Embedded in here will the a position for tasks.-->
     <div class="card shadow m-2 border-danger" style="background-color:#ddd">
       <div class="d-flex justify-content-between px-2">
-        <span class="text-muted" :style="{fontSize:fontSize}">LIST ID: {{list.id}}</span>&nbsp;
+        <!-- BOARD ID -->
+        <span class="text-secondary text-left" :style="{fontSize:fontSize}">{{list.boardId}}</span>
         <span>
           <i class="fas fa-pencil-alt action" @click="toggleEdit"></i>&nbsp;
           <i class="far fa-trash-alt text-danger action" @click="deleteList(list.id)"></i>
         </span>
       </div>
-      <div class="card-body">
+      <div class="card-body py-0">
+        <!-- EDIT LIST FORM -->
+        <div class="m-2">
+          <form class="d-inline" v-if="edit" @submit.prevent="editList">
+            <input type="text" name="title" v-model="list.title" />
+            <input type="text" name="description" v-model="list.description" />
+            <button type="submit" class="btn btn-outline-danger">Submit</button>
+          </form>
+        </div>
         <h4 class="card-title">{{list.title}}</h4>
-        <div>{{list.description}}</div>
-        <div>LIST'S BOARD ID: {{list.boardId}}</div>
-        <form class="d-inline" v-if="edit" @submit.prevent="editList">
-          <input type="text" name="title" v-model="list.title" />
-          <input type="text" name="description" v-model="list.description" />
-          <button type="submit" class="btn btn-outline-danger">Submit</button>
-        </form>
+        <div class="pb-2">{{list.description}}</div>
+        <!-- LIST ID -->
+        <div class="text-danger text-left" :style="{fontSize:fontSize}">{{list.id}}</div>
         <task v-for="task in tasks" :key="task.id" :task="task" v-show="list.id == task.listId" />
       </div>
       <!-- ADD TASK FORM -->
-      <div class="m-2">
-        <div v-if="taskForm == false" class="text-right text-primary">
+      <div class="p-2">
+        <div v-if="taskForm == false" class="text-right text-primary m-2">
           <i class="fas fa-plus action" @click="toggleTask">&nbsp;Add Task</i>
         </div>
         <div v-else class="text-right text-primary">

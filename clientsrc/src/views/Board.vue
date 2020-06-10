@@ -9,7 +9,7 @@
     <!-- Insert form to Add new list items-->
     <div class="d-flex justify-content-center text-danger">Create List</div>
     <div class="d-flex justify-content-center">
-      <form class="form-inline" @submit.prevent="addList">
+      <form class="form-inline mb-4" @submit.prevent="addList">
         <div class="form-group">
           <input
             type="text"
