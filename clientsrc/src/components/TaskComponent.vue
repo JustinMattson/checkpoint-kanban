@@ -91,7 +91,7 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("getComments");
+    return this.$store.dispatch("getComments", this.task.id);
   },
   computed: {
     comments() {

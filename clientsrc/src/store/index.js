@@ -254,11 +254,12 @@ export default new Vuex.Store({
     //#endregion
 
     //#region -- Comments --
-    async getComments({ commit, dispatch }) {
+    async getComments({ commit, dispatch }, id) {
       try {
-        await api.get("comments").then((res) => {
+        await api.get("tasks/" + id + "/comments").then((res) => {
           commit("setComments", res.data);
         });
+        debugger;
       } catch (error) {
         console.error(error);
       }

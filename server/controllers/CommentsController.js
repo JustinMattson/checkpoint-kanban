@@ -28,7 +28,10 @@ export class CommentsController extends BaseController {
 
   async getById(req, res, next) {
     try {
-      let data = await commentService.getById(req.params.id, req.userInfo.email);
+      let data = await commentService.getById(
+        req.params.id,
+        req.userInfo.email
+      );
       return res.send(data);
     } catch (error) {
       next(error);

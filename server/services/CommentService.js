@@ -8,6 +8,9 @@ class CommentService {
       "name picture"
     );
   }
+  async getCommentsByTaskId(id, email) {
+    return await dbContext.Comments.find({ taskId: id, creatorEmail: email });
+  }
 
   async getById(id, userEmail) {
     let data = await dbContext.Comments.findOne({
