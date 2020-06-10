@@ -1,6 +1,6 @@
 <template>
   <div class="comment">
-    <div class="card shadow border-success my-1" style="background-color:#ddd">
+    <div class="card shadow border-success my-1" style="background-color:#ddd;maxWidth:35em">
       <div class="d-flex justify-content-between px-2">
         <span class="text-left">
           <!-- TASK ID -->
@@ -11,7 +11,7 @@
           <i class="far fa-trash-alt text-danger action" @click="deleteComment(comment.id)"></i>
         </span>
       </div>
-      <div class="card-body p-2">
+      <div class="card-body p-2 text-wrap">
         <!-- EDIT COMMENT FORM -->
         <div class="m-2">
           <form class="d-inline" v-if="edit" @submit.prevent="editComment">

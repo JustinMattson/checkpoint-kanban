@@ -1,6 +1,6 @@
 <template>
   <div class="task">
-    <div class="card shadow border-primary my-1" style="background-color:#eee">
+    <div class="card shadow border-primary my-1" style="background-color:#eee;maxWidth:35em">
       <div class="d-flex justify-content-between px-2">
         <!-- LIST ID -->
         <span class="text-muted text-left" :style="{fontSize:fontSize}">{{task.listId}}</span>&nbsp;
@@ -9,7 +9,7 @@
           <i class="far fa-trash-alt text-danger action" @click="deleteTask(task.id)"></i>
         </span>
       </div>
-      <div class="card-body py-0">
+      <div class="card-body py-0 text-wrap">
         <!-- EDIT TASK FORM -->
         <div class="m-2">
           <form class="d-inline" v-if="edit" @submit.prevent="editTask">

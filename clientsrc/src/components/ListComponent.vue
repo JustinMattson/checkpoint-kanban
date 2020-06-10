@@ -2,7 +2,7 @@
   <div class="list col-xs-4">
     <!-- This is the component that will draw each of the list item.
     Embedded in here will the a position for tasks.-->
-    <div class="card shadow m-2 border-danger" style="background-color:#ddd">
+    <div class="card shadow m-2 border-danger" style="background-color:#ddd;maxWidth:40em">
       <div class="d-flex justify-content-between px-2">
         <!-- BOARD ID -->
         <span class="text-secondary text-left" :style="{fontSize:fontSize}">{{list.boardId}}</span>
@@ -11,7 +11,7 @@
           <i class="far fa-trash-alt text-danger action" @click="deleteList(list.id)"></i>
         </span>
       </div>
-      <div class="card-body py-0">
+      <div class="card-body py-0 text-wrap">
         <!-- EDIT LIST FORM -->
         <div class="m-2">
           <form class="d-inline" v-if="edit" @submit.prevent="editList">
