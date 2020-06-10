@@ -1,6 +1,6 @@
 <template>
   <div class="task">
-    <div class="card shadow border-primary" style="background-color:#eee">
+    <div class="card shadow border-primary my-1" style="background-color:#eee">
       <div class="d-flex justify-content-between px-2">
         <!-- LIST ID -->
         <span class="text-muted text-left" :style="{fontSize:fontSize}">{{task.listId}}</span>&nbsp;
@@ -23,17 +23,41 @@
 
         <!-- TASK ID -->
         <div class="text-primary text-left" :style="{fontSize:fontSize}">{{task.id}}</div>
-        <comment v-for="comment in comments" :key="comment.id" :comment="comment" />
+        <comment
+          v-for="comment in comments"
+          :key="comment.id"
+          :comment="comment"
+          v-show="task.id == comment.taskId"
+        />
       </div>
 
-      <!-- ADD COMMENT FORM -->
       <div class="p-2">
-        <div v-if="commentForm == false" class="text-right text-success m-2">
-          <i class="fas fa-plus action" @click="toggleComment">&nbsp;Add Comment</i>
-        </div>
-        <div v-else class="text-right text-success">
-          <i class="fas fa-minus action" @click="toggleComment">&nbsp;Done Adding Comments</i>
-        </div>
+        <!-- DROPDOWN -->
+        <!-- Small button groups (default and split) -->
+        <span class="d-flex justify-content-between">
+          <div class="btn-group dropup">
+            <button
+              class="btn btn-outline-danger btn-sm dropdown-toggle"
+              type="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >Move Task</button>
+            <div class="dropdown-menu">
+              ...
+              <li>In Test</li>
+              <li>Review Complete</li>
+              <li>Celebrate Success</li>
+            </div>
+          </div>
+          <div v-if="commentForm == false" class="text-right text-success m-2">
+            <i class="fas fa-plus action" @click="toggleComment">&nbsp;Add Comment</i>
+          </div>
+          <div v-else class="text-right text-success">
+            <i class="fas fa-minus action" @click="toggleComment">&nbsp;Done Adding Comments</i>
+          </div>
+        </span>
+        <!-- ADD COMMENT FORM -->
         <form class="d-inline" v-if="commentForm" @submit.prevent="addComment">
           <input type="text" name="title" v-model="newComment.title" placeholder="Comment Title..." />
           <input
@@ -62,7 +86,8 @@ export default {
       commentForm: false,
       newComment: {
         taskId: this.task.id
-      }
+      },
+      listList: {}
     };
   },
   mounted() {
@@ -80,18 +105,18 @@ export default {
     toggleComment() {
       this.commentForm = !this.commentForm;
     },
-
-    deleteTask() {
-      this.$store.dispatch("deleteTask", this.task.id);
+    addComment() {
+      this.$store.dispatch("addComment", { ...this.newComment });
+      this.newComment = { taskId: this.task.id };
     },
     editTask() {
       this.$store.dispatch("editTask", this.task);
       this.edit = false;
     },
-    addComment() {
-      this.$store.dispatch("addComment", { ...this.newComment });
-      this.newComment = { taskId: this.task.id };
-    }
+    deleteTask() {
+      this.$store.dispatch("deleteTask", this.task.id);
+    },
+    moveTaskToList() {}
   },
   components: {
     Comment

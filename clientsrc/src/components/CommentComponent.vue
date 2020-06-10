@@ -1,6 +1,6 @@
 <template>
   <div class="comment">
-    <div class="card shadow border-success" style="background-color:#ddd">
+    <div class="card shadow border-success my-1" style="background-color:#ddd">
       <div class="d-flex justify-content-between px-2">
         <span class="text-left">
           <!-- TASK ID -->
@@ -14,7 +14,7 @@
       <div class="card-body p-2">
         <!-- EDIT COMMENT FORM -->
         <div class="m-2">
-          <form class="d-inline" v-if="edit" @submit.prevent="editTask">
+          <form class="d-inline" v-if="edit" @submit.prevent="editComment">
             <input type="text" name="title" v-model="comment.title" />
             <input type="text" name="description" v-model="comment.description" />
             <button type="submit" class="btn btn-outline-success">Submit</button>
