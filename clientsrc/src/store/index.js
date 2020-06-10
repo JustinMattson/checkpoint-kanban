@@ -22,8 +22,8 @@ export default new Vuex.Store({
     boards: [],
     activeBoard: {},
     lists: [],
-    tasks: [],
-    comments: [],
+    tasks: {},
+    comments: {},
   },
   mutations: {
     setUser(state, user) {
@@ -65,10 +65,10 @@ export default new Vuex.Store({
 
     //#region TASKS
     setTask(state, task) {
-      state.tasks.push(task);
+      state.tasks[task.listId].push(task);
     },
     setTasks(state, tasks) {
-      state.tasks = tasks;
+      Vue.set(state.tasks, tasks.listId, tasks.data);
     },
     updateTask(state, update) {
       let foundTask = state.tasks.find((t) => t.id == update.id);
@@ -82,10 +82,10 @@ export default new Vuex.Store({
 
     //#region COMMENTS
     setComment(state, comment) {
-      state.comments.push(comment);
+      state.comments[comment.taskId].push(comment);
     },
     setComments(state, comments) {
-      state.comments = comments;
+      Vue.set(state.comments, comments.taskId, comments.data);
     },
     updateComment(state, update) {
       let foundComment = state.comments.find((t) => t.id == update.id);
@@ -168,9 +168,9 @@ export default new Vuex.Store({
     //#endregion
 
     //#region -- LISTS --
-    async getLists({ commit, dispatch }) {
+    async getLists({ commit, dispatch }, id) {
       try {
-        await api.get("lists").then((res) => {
+        await api.get("boards/" + id + "/lists").then((res) => {
           commit("setLists", res.data);
         });
       } catch (error) {
@@ -211,11 +211,10 @@ export default new Vuex.Store({
     //#endregion
 
     //#region -- Tasks --
-    async getTasks({ commit, dispatch }) {
+    async getTasks({ commit, dispatch }, id) {
       try {
-        await api.get("tasks").then((res) => {
-          commit("setTasks", res.data);
-        });
+        let res = await api.get("lists/" + id + "/tasks");
+        commit("setTasks", { listId: id, data: res.data });
       } catch (error) {
         console.error(error);
       }
@@ -256,10 +255,8 @@ export default new Vuex.Store({
     //#region -- Comments --
     async getComments({ commit, dispatch }, id) {
       try {
-        await api.get("tasks/" + id + "/comments").then((res) => {
-          commit("setComments", res.data);
-        });
-        debugger;
+        let res = await api.get("tasks/" + id + "/comments");
+        commit("setComments", { taskId: id, data: res.data });
       } catch (error) {
         console.error(error);
       }

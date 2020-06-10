@@ -23,12 +23,9 @@
 
         <!-- TASK ID -->
         <div class="text-primary text-left" :style="{fontSize:fontSize}">{{task.id}}</div>
-        <comment
-          v-for="comment in comments"
-          :key="comment.id"
-          :comment="comment"
-          v-show="task.id == comment.taskId"
-        />
+        <!-- v-show below removed from <comment /> because only the last task was getting the comments -->
+        <!-- v-show="task.id == comment.taskId" -->
+        <comment v-for="comment in comments" :key="comment.id" :comment="comment" />
       </div>
 
       <div class="p-2">
@@ -85,17 +82,19 @@ export default {
       edit: false,
       commentForm: false,
       newComment: {
+        boardId: this.task.boardID,
+        listId: this.task.listId,
         taskId: this.task.id
       },
       listList: {}
     };
   },
   mounted() {
-    return this.$store.dispatch("getComments", this.task.id);
+    this.$store.dispatch("getComments", this.task.id);
   },
   computed: {
     comments() {
-      return this.$store.state.comments;
+      return this.$store.state.comments[this.task.id];
     }
   },
   methods: {
@@ -107,7 +106,11 @@ export default {
     },
     addComment() {
       this.$store.dispatch("addComment", { ...this.newComment });
-      this.newComment = { taskId: this.task.id };
+      this.newComment = {
+        boardId: this.task.boardID,
+        listId: this.task.listId,
+        taskId: this.task.id
+      };
     },
     editTask() {
       this.$store.dispatch("editTask", this.task);

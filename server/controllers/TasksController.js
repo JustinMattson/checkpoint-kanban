@@ -1,8 +1,8 @@
 import express from "express";
 import BaseController from "../utils/BaseController";
 import auth0provider from "@bcwdev/auth0provider";
-import { commentService } from "../services/CommentService";
 import { taskService } from "../services/TaskService";
+import { commentService } from "../services/CommentService";
 
 //PUBLIC
 export class TasksController extends BaseController {

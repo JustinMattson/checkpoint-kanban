@@ -8,6 +8,9 @@ class ListService {
       "name picture"
     );
   }
+  async getListsByBoardId(id, email) {
+    return await dbContext.Lists.find({ boardId: id, creatorEmail: email });
+  }
 
   async getById(id, userEmail) {
     let data = await dbContext.Lists.findOne({

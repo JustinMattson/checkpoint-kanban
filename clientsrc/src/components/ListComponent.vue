@@ -24,7 +24,8 @@
         <div class="pb-2">{{list.description}}</div>
         <!-- LIST ID -->
         <div class="text-danger text-left" :style="{fontSize:fontSize}">{{list.id}}</div>
-        <task v-for="task in tasks" :key="task.id" :task="task" v-show="list.id == task.listId" />
+        <!-- removed v-show after refactoring server: v-show="list.id == task.listId"  -->
+        <task v-for="task in tasks" :key="task.id" :task="task" />
       </div>
       <!-- ADD TASK FORM -->
       <div class="p-2">
@@ -61,6 +62,7 @@ export default {
       edit: false,
       taskForm: false,
       newTask: {
+        boardId: this.list.boardId,
         listId: this.list.id
       }
     };
@@ -70,7 +72,7 @@ export default {
   },
   computed: {
     tasks() {
-      return this.$store.state.tasks;
+      return this.$store.state.tasks[this.list.id];
     }
   },
   methods: {
@@ -89,7 +91,10 @@ export default {
     },
     addTask() {
       this.$store.dispatch("addTask", { ...this.newTask });
-      this.newTask = { listId: this.list.id };
+      this.newTask = {
+        boardId: this.list.boardId,
+        listId: this.list.id
+      };
     }
   },
   components: {

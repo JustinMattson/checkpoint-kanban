@@ -8,6 +8,9 @@ class TaskService {
       "name picture"
     );
   }
+  async getTasksByListId(id, email) {
+    return await dbContext.Tasks.find({ listId: id, creatorEmail: email });
+  }
 
   async getById(id, userEmail) {
     let data = await dbContext.Tasks.findOne({

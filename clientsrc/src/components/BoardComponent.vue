@@ -44,6 +44,9 @@ export default {
       edit: false
     };
   },
+  // mounted() {
+  //   return this.$store.dispatch("getLists", this.board.id);
+  // },
   computed: {
     boards() {
       return this.$store.state.boards;

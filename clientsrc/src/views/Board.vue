@@ -35,7 +35,8 @@
     <!-- Display our Lists -->
     <div class="container-fluid horizontal-scrollable grow">
       <div class="row">
-        <list v-for="list in lists" :key="list.id" :list="list" v-show="board.id == list.boardId" />
+        <!-- removed v-show due to refactoring server: v-show="board.id == list.boardId" -->
+        <list v-for="list in lists" :key="list.id" :list="list" />
       </div>
     </div>
   </div>
@@ -55,7 +56,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getActiveBoard", this.$route.params.boardId);
-    this.$store.dispatch("getLists", this.$route.params.id);
+    this.$store.dispatch("getLists", this.$route.params.boardId);
   },
   computed: {
     board() {
