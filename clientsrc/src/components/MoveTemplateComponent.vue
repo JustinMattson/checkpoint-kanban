@@ -1,5 +1,8 @@
 <template>
-  <li type="button" @click="move">{{list.title}}</li>
+  <li type="button" @click="move">
+    <i class="fas fa-circle fa-sm" :style="{fontSize:fontSize}"></i>
+    {{list.title}}
+  </li>
 </template>
 
 <script>
@@ -8,6 +11,7 @@ export default {
   props: ["list", "task"],
   data() {
     return {
+      fontSize: "8px",
       updateObj: {
         taskId: this.task.id,
         listId: this.task.listId,

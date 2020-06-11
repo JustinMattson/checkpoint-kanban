@@ -1,7 +1,7 @@
 <template>
   <div class="board col-xs-4">
     <!-- This is the component that will design board link on the boards vue. -->
-    <div class="card shadow m-2 border-secondary" style="bacground-color:#bbb">
+    <div class="card shadow m-2 border-secondary" style="bacground-color:#0000ff00">
       <div class="d-flex justify-content-between px-2">
         <!-- BOARD ID -->
         <span class="text-secondary" :style="{fontSize:fontSize}">{{board.id}}</span>&nbsp;
@@ -40,6 +40,7 @@ export default {
   props: ["board"],
   data() {
     return {
+      color: blue,
       fontSize: "10px",
       edit: false
     };
@@ -70,4 +71,7 @@ export default {
 
 
 <style scoped>
+.something {
+  color: #0000ff00;
+}
 </style>

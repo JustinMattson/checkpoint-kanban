@@ -1,5 +1,5 @@
 <template>
-  <div class="home container-fluid bg-cstm">
+  <div class="home container-fluid text-shadow">
     <div class="row d-flex p-5">
       <div class="col text-light">
         <h1>Welcome to KanBan Boards!</h1>
@@ -25,22 +25,6 @@ export default {
 
 
 <style scoped>
-.bg-cstm {
-  /* background-image: url("https://iso.500px.com/wp-content/uploads/2016/05/stock-photo-154486323-1-1500x652.jpg");
-  background-repeat: no-repeat; */
-  background: url("https://iso.500px.com/wp-content/uploads/2016/05/stock-photo-154486323-1-1500x652.jpg")
-    no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  overflow-y: hidden;
-  text-shadow: 1px 1px 5px black;
-  /* min-height: 100vh; */
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* flex-grow: 1; */
-}
 .home {
   position: absolute;
   top: 75px;

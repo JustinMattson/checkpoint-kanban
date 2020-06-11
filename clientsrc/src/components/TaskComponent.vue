@@ -86,8 +86,7 @@ export default {
         boardId: this.task.boardId,
         listId: this.task.listId,
         taskId: this.task.id
-      },
-      listList: {}
+      }
     };
   },
   mounted() {

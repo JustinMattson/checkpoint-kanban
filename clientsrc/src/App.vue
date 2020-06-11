@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="bg-cstm">
     <navbar />
     <router-view />
   </div>
@@ -70,5 +70,16 @@ export default {
 }
 .action {
   cursor: pointer;
+}
+.bg-cstm {
+  background: url("https://iso.500px.com/wp-content/uploads/2016/05/stock-photo-154486323-1-1500x652.jpg")
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.text-shadow {
+  text-shadow: 1px 1px 5px black;
 }
 </style>

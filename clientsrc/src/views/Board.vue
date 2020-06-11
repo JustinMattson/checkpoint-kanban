@@ -4,8 +4,8 @@
       class="text-left text-muted"
       :style="{fontSize:fontSize}"
     >Board Vue: Display multiple list components. Each list can have multiple task components. Each task can have multiple comments that can be moved to the various lists.</div>
-    <h1 v-if="board.title">{{board.title}}</h1>
-    <h1 v-else>Loading...</h1>
+    <h1 class="text-light text-shadow" v-if="board.title">{{board.title}}</h1>
+    <h1 class="text-light text-shadow" v-else>Loading...</h1>
     <!-- Insert form to Add new list items-->
     <div class="d-flex justify-content-center text-danger">Create List</div>
     <div class="d-flex justify-content-center">

@@ -1,6 +1,6 @@
 <template>
-  <div class="boards">
-    <h1>WELCOME TO THE BOARDS!!!</h1>
+  <div class="boards bg-cstm">
+    <h1 class="text-light text-shadow">WELCOME TO THE BOARDS!!!</h1>
     <span class="text-secondary">Create Board</span>
     <form @submit.prevent="addBoard" class="mb-4">
       <input type="text" placeholder="title" v-model="newBoard.title" required />
