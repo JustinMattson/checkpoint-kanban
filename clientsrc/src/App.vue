@@ -20,11 +20,10 @@ export default {
     }
   },
   components: {
-    Navbar
-  }
+    Navbar,
+  },
 };
 </script>
-
 
 <style lang="scss">
 @import "./assets/_variables.scss";
@@ -78,6 +77,7 @@ export default {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-attachment: fixed;
 }
 .text-shadow {
   text-shadow: 1px 1px 5px black;

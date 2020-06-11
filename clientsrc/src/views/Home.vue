@@ -4,7 +4,10 @@
       <div class="col text-light">
         <h1>Welcome to KanBan Boards!</h1>
         <div>&nbsp;</div>
-        <h2>This is a description of our Boards app visible without authentication. On this site you can manage projects.</h2>
+        <h2>
+          Our Boards app is not visible without authentication. On this site you
+          can manage projects.
+        </h2>
         <h3>Log in to get started!</h3>
       </div>
     </div>
@@ -19,17 +22,16 @@ export default {
   },
   computed: {},
   methods: {},
-  components: {}
+  components: {},
 };
 </script>
 
-
 <style scoped>
-.home {
+/* .home {
   position: absolute;
   top: 75px;
   right: 0;
   left: 0;
   bottom: 0;
-}
+} */
 </style>

@@ -3,10 +3,16 @@
     <div class="card shadow border-primary my-1" style="background-color:#eee;">
       <div class="d-flex justify-content-between px-2">
         <!-- LIST ID -->
-        <span class="text-muted text-left" :style="{fontSize:fontSize}">{{task.listId}}</span>&nbsp;
+        <span class="text-muted text-left" :style="{ fontSize: fontSize }">{{
+          task.listId
+        }}</span
+        >&nbsp;
         <span>
           <i class="fas fa-pencil-alt action" @click="toggleEdit"></i>&nbsp;
-          <i class="far fa-trash-alt text-danger action" @click="deleteTask(task.id)"></i>
+          <i
+            class="far fa-trash-alt text-danger action"
+            @click="deleteTask(task.id)"
+          ></i>
         </span>
       </div>
       <div class="card-body py-0 text-wrap">
@@ -15,17 +21,25 @@
           <form class="d-inline" v-if="edit" @submit.prevent="editTask">
             <input type="text" name="title" v-model="task.title" />
             <input type="text" name="description" v-model="task.description" />
-            <button type="submit" class="btn btn-outline-primary">Submit</button>
+            <button type="submit" class="btn btn-outline-primary">
+              Submit
+            </button>
           </form>
         </div>
-        <h4 class="card-title">{{task.title}}</h4>
-        <div class="pb-2">{{task.description}}</div>
+        <h4 class="card-title">{{ task.title }}</h4>
+        <div class="pb-2">{{ task.description }}</div>
 
         <!-- TASK ID -->
-        <div class="text-primary text-left" :style="{fontSize:fontSize}">{{task.id}}</div>
+        <div class="text-primary text-left" :style="{ fontSize: fontSize }">
+          {{ task.id }}
+        </div>
         <!-- v-show below removed from <comment /> because only the last task was getting the comments -->
         <!-- v-show="task.id == comment.taskId" -->
-        <comment v-for="comment in comments" :key="comment.id" :comment="comment" />
+        <comment
+          v-for="comment in comments"
+          :key="comment.id"
+          :comment="comment"
+        />
       </div>
 
       <div class="p-2">
@@ -39,24 +53,40 @@
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
-            >Move Task</button>
+            >
+              Move Task
+            </button>
             <div class="dropdown-menu">
               <ul>
-                <moveTemplate v-for="list in lists" :key="list.id" :list="list" :task="task" />
+                <moveTemplate
+                  v-for="list in lists"
+                  :key="list.id"
+                  :list="list"
+                  :task="task"
+                />
               </ul>
             </div>
           </div>
           <div v-if="commentForm == false" class="text-right text-success m-2">
-            <i class="fas fa-plus action" @click="toggleComment">&nbsp;Add Comment</i>
+            <i class="fas fa-plus action" @click="toggleComment"
+              >&nbsp;Add Comment</i
+            >
           </div>
           <div v-else class="text-right text-success">
-            <i class="fas fa-minus action" @click="toggleComment">&nbsp;Done Adding Comments</i>
+            <i class="fas fa-minus action" @click="toggleComment"
+              >&nbsp;Done Adding Comments</i
+            >
           </div>
         </span>
 
         <!-- ADD COMMENT FORM -->
         <form class="d-inline" v-if="commentForm" @submit.prevent="addComment">
-          <input type="text" name="title" v-model="newComment.title" placeholder="Comment Title..." />
+          <input
+            type="text"
+            name="title"
+            v-model="newComment.title"
+            placeholder="Comment Title..."
+          />
           <input
             type="text"
             name="description"
@@ -70,10 +100,10 @@
   </div>
 </template>
 
-
 <script>
 import Comment from "@/components/CommentComponent.vue";
 import moveTemplate from "@/components/MoveTemplateComponent.vue";
+import swal from "sweetalert";
 export default {
   name: "Task",
   props: ["task"],
@@ -85,8 +115,8 @@ export default {
       newComment: {
         boardId: this.task.boardId,
         listId: this.task.listId,
-        taskId: this.task.id
-      }
+        taskId: this.task.id,
+      },
     };
   },
   mounted() {
@@ -98,7 +128,7 @@ export default {
     },
     lists() {
       return this.$store.state.lists;
-    }
+    },
   },
   methods: {
     toggleEdit() {
@@ -112,7 +142,7 @@ export default {
       this.newComment = {
         boardId: this.task.boardId,
         listId: this.task.listId,
-        taskId: this.task.id
+        taskId: this.task.id,
       };
     },
     editTask() {
@@ -120,17 +150,31 @@ export default {
       this.edit = false;
     },
     deleteTask() {
-      this.$store.dispatch("deleteTask", this.task);
+      swal({
+        title: "Are you sure?",
+        text:
+          "Delete may orphan children. Click 'Ok' to confirm you wish to delete List",
+        icon: "error",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          this.$store.dispatch("deleteTask", this.task);
+          swal("Poof! Your task has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Delete cancelled");
+        }
+      });
     },
-    moveTaskToList() {}
+    moveTaskToList() {},
   },
   components: {
     Comment,
-    moveTemplate
-  }
+    moveTemplate,
+  },
 };
 </script>
 
-
-<style scoped>
-</style>
+<style scoped></style>

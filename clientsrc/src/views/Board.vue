@@ -1,10 +1,11 @@
 <template>
   <div class="board">
-    <div
-      class="text-left text-muted"
-      :style="{fontSize:fontSize}"
-    >Board Vue: Display multiple list components. Each list can have multiple task components. Each task can have multiple comments that can be moved to the various lists.</div>
-    <h1 class="text-light text-shadow" v-if="board.title">{{board.title}}</h1>
+    <div class="text-left text-muted" :style="{ fontSize: fontSize }">
+      Board Vue: Display multiple list components. Each list can have multiple
+      task components. Each task can have multiple comments that can be moved to
+      the various lists.
+    </div>
+    <h1 class="text-light text-shadow" v-if="board.title">{{ board.title }}</h1>
     <h1 class="text-light text-shadow" v-else>Loading...</h1>
     <!-- Insert form to Add new list items-->
     <div class="d-flex justify-content-center text-danger">Create List</div>
@@ -33,7 +34,7 @@
     </div>
 
     <!-- Display our Lists -->
-    <div class="container-fluid horizontal-scrollable grow">
+    <div class="container-fluid horizontal-scrollable">
       <div class="row">
         <!-- removed v-show due to refactoring server: v-show="board.id == list.boardId" -->
         <list v-for="list in lists" :key="list.id" :list="list" />
@@ -50,8 +51,8 @@ export default {
     return {
       fontSize: "10pt",
       newList: {
-        boardId: this.$route.params.boardId
-      }
+        boardId: this.$route.params.boardId,
+      },
     };
   },
   mounted() {
@@ -64,22 +65,22 @@ export default {
     },
     lists() {
       return this.$store.state.lists;
-    }
+    },
   },
   methods: {
     addList() {
       this.$store.dispatch("addList", { ...this.newList });
       this.newList = { boardId: this.$route.params.boardId };
-    }
+    },
   },
   components: {
-    List
-  }
+    List,
+  },
 };
 </script>
 
 <style scoped>
-.grow {
+/* .grow {
   min-height: 100vh;
-}
+} */
 </style>
