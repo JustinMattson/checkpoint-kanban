@@ -64,6 +64,7 @@ export default {
   position: absolute;
 }
 .horizontal-scrollable > .row > .col-xs-4 {
+  background-color: #ffffffff;
   display: inline-block;
   float: none;
 }
