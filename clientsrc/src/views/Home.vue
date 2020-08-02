@@ -1,6 +1,7 @@
 <template>
   <div class="home container-fluid text-shadow">
     <div class="row d-flex p-5">
+      <div class="col-12" style="height:50px;">&nbsp;</div>
       <div class="col text-light">
         <h1>Welcome to KanBan Boards!</h1>
         <div>&nbsp;</div>
