@@ -58,6 +58,7 @@ export default {
   min-height: 100vh;
 }
 .horizontal-scrollable > .row {
+  background-color: #ffffffff;
   overflow-x: auto;
   white-space: nowrap;
   flex-wrap: nowrap;
