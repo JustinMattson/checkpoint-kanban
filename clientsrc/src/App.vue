@@ -62,10 +62,24 @@ export default {
   white-space: nowrap;
   flex-wrap: nowrap;
   position: absolute;
+  background: url("https://iso.500px.com/wp-content/uploads/2016/05/stock-photo-154486323-1-1500x652.jpg")
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
 }
 .horizontal-scrollable > .row > .col-xs-4 {
   display: inline-block;
   float: none;
+  background: url("https://iso.500px.com/wp-content/uploads/2016/05/stock-photo-154486323-1-1500x652.jpg")
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
 }
 .action {
   cursor: pointer;

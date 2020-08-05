@@ -2,6 +2,7 @@
   <div class="board container-fluid">
     <div class="row">
       <div class="col-12">
+        <div class="col-12" style="height:75px;">&nbsp;</div>
         <div class="text-left text-muted" :style="{ fontSize: fontSize }">
           Board Vue: Display multiple list components. Each list can have multiple
           task components. Each task can have multiple comments that can be moved to

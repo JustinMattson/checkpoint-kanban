@@ -1,5 +1,5 @@
 <template>
-  <div class="boards bg-cstm">
+  <div class="boards">
     <h1 class="text-light text-shadow">WELCOME TO THE BOARDS!!!</h1>
     <span class="text-secondary">Create Board</span>
     <form @submit.prevent="addBoard" class="mb-4">
