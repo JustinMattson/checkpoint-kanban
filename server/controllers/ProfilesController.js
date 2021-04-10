@@ -7,7 +7,7 @@ export class ProfilesController extends BaseController {
   constructor() {
     super("api/profile");
     this.router
-      .use(Auth0provider.getAuthorizedUserInfo)
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .get("", this.getUserProfile)
       .put("/:id", this.edit);
   }

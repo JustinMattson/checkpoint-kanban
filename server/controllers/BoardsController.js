@@ -9,7 +9,7 @@ export class BoardsController extends BaseController {
   constructor() {
     super("api/boards");
     this.router
-      .use(Auth0provider.getAuthorizedUserInfo)
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .get("", this.getAll)
       .get("/:id", this.getById)
       .get("/:id/lists", this.getListsByBoardId)

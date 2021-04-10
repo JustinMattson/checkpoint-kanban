@@ -20,7 +20,7 @@ class SocketService {
    */
   async Authenticate(socket, bearerToken) {
     try {
-      let user = await Auth0provider.getUserInfoFromBearerToken(bearerToken);
+      let user = await Auth0Provider.getUserInfoFromBearerToken(bearerToken);
       socket["user"] = user;
       socket.join(user.id);
       socket.emit("AUTHENTICATED");

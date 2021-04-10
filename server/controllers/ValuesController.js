@@ -9,7 +9,7 @@ export class ValuesController extends BaseController {
     this.router
       .get("", this.getAll)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
-      .use(Auth0provider.isAuthorized)
+      .use(Auth0Provider.isAuthorized)
       .post("", this.create);
   }
   async getAll(req, res, next) {

@@ -9,7 +9,7 @@ export class ListsController extends BaseController {
   constructor() {
     super("api/lists");
     this.router
-      .use(Auth0provider.getAuthorizedUserInfo)
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .get("", this.getAll)
       .get("/:id", this.getById)
       .get("/:id/tasks", this.getTasksByListId)
