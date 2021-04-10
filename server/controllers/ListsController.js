@@ -1,6 +1,6 @@
 import express from "express";
 import BaseController from "../utils/BaseController";
-import auth0provider from "@bcwdev/auth0provider";
+import { Auth0Provider } from "@bcwdev/auth0provider";
 import { listService } from "../services/ListService";
 import { taskService } from "../services/TaskService";
 
@@ -9,7 +9,7 @@ export class ListsController extends BaseController {
   constructor() {
     super("api/lists");
     this.router
-      .use(auth0provider.getAuthorizedUserInfo)
+      .use(Auth0provider.getAuthorizedUserInfo)
       .get("", this.getAll)
       .get("/:id", this.getById)
       .get("/:id/tasks", this.getTasksByListId)

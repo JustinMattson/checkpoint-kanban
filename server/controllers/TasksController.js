@@ -1,6 +1,6 @@
 import express from "express";
 import BaseController from "../utils/BaseController";
-import auth0provider from "@bcwdev/auth0provider";
+import { Auth0Provider } from "@bcwdev/auth0provider";
 import { taskService } from "../services/TaskService";
 import { commentService } from "../services/CommentService";
 
@@ -9,7 +9,7 @@ export class TasksController extends BaseController {
   constructor() {
     super("api/tasks");
     this.router
-      .use(auth0provider.getAuthorizedUserInfo)
+      .use(Auth0provider.getAuthorizedUserInfo)
       .get("", this.getAll)
       .get("/:id", this.getById)
       .get("/:id/comments", this.getCommentsByTaskId)

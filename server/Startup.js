@@ -3,7 +3,7 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import { RegisterControllers, Paths } from "../Setup";
-import auth0provider from "@bcwdev/auth0provider";
+import { Auth0Provider } from "@bcwdev/auth0provider";
 
 export default class Startup {
   static ConfigureGlobalMiddleware(app) {
@@ -14,17 +14,17 @@ export default class Startup {
         let originIsWhitelisted = whitelist.indexOf(origin) !== -1;
         callback(null, originIsWhitelisted);
       },
-      credentials: true
+      credentials: true,
     };
     app.use(helmet());
     app.use(cors(corsOptions));
     app.use(bp.json({ limit: "50mb" }));
 
     // NOTE Configures auth0 middleware that is used throughout controllers
-    auth0provider.configure({
+    Auth0provider.configure({
       domain: process.env.AUTH_DOMAIN,
       clientId: process.env.AUTH_CLIENT_ID,
-      audience: process.env.AUTH_AUDIENCE
+      audience: process.env.AUTH_AUDIENCE,
     });
   }
   static ConfigureRoutes(app) {
@@ -38,11 +38,9 @@ export default class Startup {
 
   static registerErrorHandlers(app) {
     // NOTE SEND 404 for any unknown routes
-    app.use(
-      "/api",
-      (_, res, next) => {
-        res.status(404).send({ message: "route not found", status: 404 })
-      });
+    app.use("/api", (_, res, next) => {
+      res.status(404).send({ message: "route not found", status: 404 });
+    });
     app.use(
       "*",
       (_, res, next) => {
